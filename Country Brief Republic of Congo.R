@@ -3,24 +3,9 @@ library(WDI)
 ?WDI
 
 
-
-
-
-
-WDI(
-  country = "COD",
-  indicator = c("SP.POP.TOTL", "SP.RUR.TOTL.ZG", "SE.PRM.ENRR", "SE.PRM.NENR", "SE.PRM.CMPT.FE.ZS", "SP.RUR.TOTL.ZG", "SP.DYN.LE00.MA.IN", "SH.STA.MMRT.NE", "SP.DYN.IMRT.FE.IN", "SH.DYN.NMRT"),
-  start = 1960,
-  end = 2020,
-  extra = FALSE,
-  cache = NULL,
-  latest = NULL,
-  language = "en"
-)
-
 ROC1 <- WDI(
   country = "COD",
-  indicator = c("SP.POP.TOTL", "SP.RUR.TOTL.ZG", "SE.PRM.ENRR", "SE.PRM.CMPT.FE.ZS", "SP.RUR.TOTL.ZG", "SP.DYN.LE00.MA.IN", "SH.STA.MMRT.NE", "SP.DYN.IMRT.FE.IN", "SH.DYN.NMRT"),
+  indicator = c("SP.POP.TOTL", "SP.RUR.TOTL.ZG", "SE.PRM.ENRR", "SE.PRM.CMPT.FE.ZS", "SP.DYN.LE00.IN", "SH.STA.MMRT.NE", "SP.DYN.IMRT.FE.IN", "SH.DYN.NMRT"),
   start = 1960,
   end = 2020,
   extra = FALSE,
@@ -28,12 +13,11 @@ ROC1 <- WDI(
   latest = NULL,
   language = "en"
 )
+
 
 ROC1 %>%
   arrange(desc(year)) %>%
   filter(country == "Congo, Dem. Rep.")
-
-
 
 
 library(readxl)
@@ -57,24 +41,6 @@ ggplot(Data_for_analyses, aes(x = Year, y = Rural_population)) +
   theme_minimal()
 
 
-
-
-ggplot(Data_for_analyses, aes(x = Year, y = Rural_population, size = Population)) +
-  geom_point(alpha = .5, 
-             fill="cornflowerblue", 
-             color="black", 
-             shape=21) +
-  scale_size_continuous(range = c(1, 14)) +
-  labs(x = "Years",
-       y = "Rural population",
-       size = "Total population") +
-  theme_minimal()
-
-
-
-
-
-
 ggplot(Data_for_analyses, aes(x = Year, y = Primary_school_completion_rate, size = School_enrollment)) +
   geom_point(alpha = .5, 
              fill="cornflowerblue", 
@@ -87,17 +53,11 @@ ggplot(Data_for_analyses, aes(x = Year, y = Primary_school_completion_rate, size
   theme_minimal()
 
 
-
-
-
-
 ggplot(Data_for_analyses, aes(x = Year, y = School_enrollment)) +
   geom_area(fill="cornflowerblue", color="black") +
   labs(x = "Years",
        y = "School enrollment") +
   theme_minimal()
-
-
 
 
 
@@ -118,23 +78,5 @@ ggplot(GPI, aes(x = Water_coverage, y = Measure)) +
        x = "Areas",
        y = "% of people covered") +
   theme_minimal()
-
-
-ggplot(GPI, aes(x = Water_coverage, y = Measure)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Water and sanitation",
-       x = "Areas",
-       y = "% of people covered") +
-  theme_minimal() +
-  coord_flip()
-
-
-
-
-
-
-
-
-
 
 
